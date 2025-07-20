@@ -293,7 +293,7 @@ function ProductList({ onHomeClick }) {
     e.preventDefault();
     setShowCart(false);
   };
-  
+
   const handleAddToCart=(plant)=>{
     dispatch(addItem(plant));
     setAddedToCart({...addedToCart,[plant.name]:true})
@@ -391,10 +391,15 @@ function ProductList({ onHomeClick }) {
                         <div className="product-cost">${plant.cost}</div>{" "}
                         {/* Display plant cost */}
                         <button
-                          className="product-button"
+                          className="product-button "
                           onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
+                          disabled={!!addedToCart[plant.name]}
+                          style={{color:!!addedToCart[plant.name]==true?"white":"black",
+                            backgroundColor:!!addedToCart[plant.name]==true?"grey":"green"
+                          }}
+                         
                         >
-                          Add to Cart
+                          {!!addedToCart[plant.name]==true?"Added":"Add To Cart"}
                         </button>
                       </div>
                     )
